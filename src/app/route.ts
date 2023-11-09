@@ -56,6 +56,12 @@ export async function GET() {
       },
     });
   } catch (err) {
-    return NextResponse.json({ error: JSON.stringify(err) }, { status: 500 });
+    return NextResponse.json(
+      {
+        status: false,
+        message: axios.isAxiosError(err) ? err.message : 'Unknown Error',
+      },
+      { status: 500 },
+    );
   }
 }
